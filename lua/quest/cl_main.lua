@@ -10,7 +10,7 @@ TTTQuests.MyQuestsDeadline = false
 
 TTTQuests.GetPlayerQuests = function(len)
 	local activeQuests = util.JSONToTable(net.ReadString())
-	local questsDeadline = tonumber(net.ReadString()) || os.time()
+	local questsDeadline = net.ReadUInt(32) || os.time()
 
 	TTTQuests.MyQuests = activeQuests
 	TTTQuests.MyQuestsDeadline = questsDeadline

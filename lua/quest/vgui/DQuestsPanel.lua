@@ -67,8 +67,19 @@ function PANEL:Init( )
 					errorText:SetTextColor(COLOR_WHITE)
 					errorText:Dock(FILL)
 					errorText:SetContentAlignment(8)
+					break
 				end
 			end
+
+			if ( TTTQuests.MyQuestsDeadline ) then
+				self.QuestDeadline = vgui.Create("DLabel", self)
+				self.QuestDeadline:SetText(string.format("Quests will reset in %s", os.date("%H:%M:%S - %d/%m/%Y", TTTQuests.MyQuestsDeadline) ))
+				self.QuestDeadline:SetTextColor(COLOR_WHITE)
+				self.QuestDeadline:SetFont("PS2_SmallHeading")
+				self.QuestDeadline:Dock(BOTTOM)
+				self.QuestDeadline:SetContentAlignment(6)
+			end
+
 			timer.Destroy("DQuestsPanel_Timer")
 		end
 	end)

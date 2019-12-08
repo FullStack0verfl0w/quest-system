@@ -13,7 +13,7 @@ TTTQuests.SendPlayerQuests = function(len, ply)
 		if row then
 			net.Start("GetPlayerQuests")
 			net.WriteString(row[1].ActiveQuests)
-			net.WriteString(row[1].QuestsDeadline)
+			net.WriteUInt( tonumber(row[1].QuestsDeadline) + TTTQuests.Config.QuestsDeadline * 24 * 60 * 60, 32)
 			net.Send(ply)
 		end
 	end
