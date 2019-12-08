@@ -24,8 +24,9 @@ if ( SERVER ) then
 	MODULE.Hooks["DoPlayerDeath"] = function(victim, attacker, dmginfo)
 		if ( #player.GetAll() >= TTTQuests.Config.MinPlayers ) then
 
-			// Player must be valid and not a bot
-			if IsValid(victim) && !victim:IsBot() then
+			// Player must be valid
+			if IsValid(victim) && victim:IsPlayer() && !victim:IsBot() then
+
 				// Check quest status
 				if TTTQuests.HasPlayerQuest(victim, "Fall") && !TTTQuests.IsQuestComplete(victim, "Fall") then
 

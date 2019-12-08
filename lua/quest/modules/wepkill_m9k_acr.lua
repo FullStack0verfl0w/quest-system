@@ -25,7 +25,13 @@ if ( SERVER ) then
 		if ( #player.GetAll() >= TTTQuests.Config.MinPlayers ) then
 
 			// Players must be valid and not bots
-			if IsValid(victim) && IsValid(attacker) && attacker:IsPlayer() && attacker != victim then
+			if IsValid(victim)
+				&& IsValid(attacker)
+				&& attacker:IsPlayer()
+				&& victim:IsPlayer()
+				&& !attacker:IsBot()
+				&& !victim:IsBot()
+				&& attacker != victim then
 
 				// Check quest status
 				if TTTQuests.HasPlayerQuest(attacker, "Wepkill_m9k_acr") && !TTTQuests.IsQuestComplete(attacker, "Wepkill_m9k_acr") then
@@ -34,7 +40,7 @@ if ( SERVER ) then
 					local weapon = dmginfo:GetAttacker():GetActiveWeapon()
 
 					// Check weapon class
-					if weapon:GetClass() == "m9k_acr" then
+					if weapon:GetClass() == "weapon_ttt_glock" then
 
 						// Select a row from table
 						local row = sql.MySQLQuery("SELECT KilledWithACR FROM TTTQuests_Wepkill_m9k_acr WHERE SteamID = \"%s\"", attacker:SteamID() )

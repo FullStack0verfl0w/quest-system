@@ -25,7 +25,13 @@ if ( SERVER ) then
 		if ( #player.GetAll() >= TTTQuests.Config.MinPlayers ) then
 
 			// Players must be valid and not bots
-			if IsValid(victim) && IsValid(attacker) && attacker != victim then
+			if IsValid(victim)
+				&& IsValid(attacker)
+				&& attacker:IsPlayer()
+				&& victim:IsPlayer()
+				&& !attacker:IsBot()
+				&& !victim:IsBot()
+				&& attacker != victim then
 
 				// Check quest status
 				if TTTQuests.HasPlayerQuest(attacker, "Traitor") && !TTTQuests.IsQuestComplete(attacker, "Traitor") then

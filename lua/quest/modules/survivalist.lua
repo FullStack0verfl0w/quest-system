@@ -28,7 +28,8 @@ if ( SERVER ) then
 		if ( #player.GetAll() >= TTTQuests.Config.MinPlayers ) then
 
 			for _, ply in pairs(player.GetAll()) do
-				// Players must be valid
+				
+				// Players must be valid and not be dead
 				if IsValid(ply) && !ply:IsSpec() then
 
 					// Check quest status
