@@ -130,6 +130,12 @@ TTTQuests.IsQuestComplete = function(ply, quest)
 	return false
 end
 
+TTTQuests.IsRDM = function(victim, attacker, dmginfo)
+	if IsValid(victim) && IsValid(attacker) then
+		return ( victim:IsTraitor() && attacker:IsTraitor() ) || ( !attacker:IsTraitor() && !victim:IsTraitor() )
+	end
+end
+
 // Just makes table with random quests
 // and returns it with creation time
 TTTQuests.SelectRandomQuests = function(self)
