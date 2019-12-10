@@ -40,7 +40,7 @@ if ( SERVER ) then
 					local weapon = dmginfo:GetAttacker():GetActiveWeapon()
 
 					// Check weapon class
-					if weapon:GetClass() == "weapon_ttt_glock" then
+					if weapon:GetClass() == "m9k_acr" && !TTTQuests.IsRDM(victim, attacker) then
 
 						// Select a row from table
 						local row = sql.MySQLQuery("SELECT KilledWithACR FROM TTTQuests_Wepkill_m9k_acr WHERE SteamID = \"%s\"", attacker:SteamID() )
