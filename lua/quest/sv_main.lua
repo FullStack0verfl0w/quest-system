@@ -13,6 +13,7 @@ TTTQuests.SendPlayerQuests = function(len, ply)
 		if row then
 			net.Start("GetPlayerQuests")
 			net.WriteString(row[1].ActiveQuests)
+			net.WriteString(row[1].CompleteQuests)
 			net.WriteUInt( tonumber(row[1].QuestsDeadline) + TTTQuests.Config.QuestsDeadline * 24 * 60 * 60, 32)
 			net.Send(ply)
 		end
@@ -35,8 +36,15 @@ TTTQuests.SendPlayerQuestsData = function(len, ply)
 			data[class] = table.ClearKeys(row[1])[1]
 		end
 	end
+
+	local row2 = sql.MySQLQuery("SELECT CompleteQuests FROM TTTQuests WHERE SteamID = \"%s\"", ply:SteamID())
+	if row2 then
+		complete = row2[1].CompleteQuests
+	end
+
 	net.Start("GetQuestsData")
 	net.WriteString(util.TableToJSON(data))
+	net.WriteString(complete)
 	net.Send(ply)
 end
 net.Receive("GetQuestsData", TTTQuests.SendPlayerQuestsData)

@@ -54,6 +54,7 @@ function PANEL:Init( )
 
 					item.ProgressBar:SetMax(Quest.TargetValue)
 					item.ProgressBar:SetCurrent(TTTQuests.MyQuestsData[class])
+					item.ProgressBar.Finished = table.HasValue(TTTQuests.MyQuestsFinished, class)
 					item.ProgressBar:Dock(BOTTOM)
 
 					item.ProgressBar.ProgressBar:SetSize(item:GetWide() - 24 * 2, 40)

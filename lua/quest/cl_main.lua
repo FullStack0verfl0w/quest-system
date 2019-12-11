@@ -6,13 +6,16 @@ include("quest/vgui/DQuestProgressBar.lua")
 
 TTTQuests.MyQuests = {}
 TTTQuests.MyQuestsData = {}
+TTTQuests.MyQuestsFinished = {}
 TTTQuests.MyQuestsDeadline = false
 
 TTTQuests.GetPlayerQuests = function(len)
 	local activeQuests = util.JSONToTable(net.ReadString())
+	local finishedQuests = util.JSONToTable(net.ReadString())
 	local questsDeadline = net.ReadUInt(32) || os.time()
 
 	TTTQuests.MyQuests = activeQuests
+	TTTQuests.MyQuestsFinished = finishedQuests
 	TTTQuests.MyQuestsDeadline = questsDeadline
 end
 net.Receive("GetPlayerQuests", TTTQuests.GetPlayerQuests)
@@ -40,7 +43,9 @@ hook.Add("PS2_OpenMenu", "TTTQuests_MenuHook", TTTQuests.OnOpenMenu)
 
 TTTQuests.GetQuestsData = function(len)
 	local data = util.JSONToTable(net.ReadString())
+	local finished = util.JSONToTable(net.ReadString())
 	TTTQuests.MyQuestsData = data
+	TTTQuests.MyQuestsFinished = finished
 
 	local QuestsPanel
 	for _, tab in pairs(Pointshop2.InventoryPanels2) do
@@ -53,6 +58,7 @@ TTTQuests.GetQuestsData = function(len)
 			local quest = TTTQuests.Quests[item:GetQuestClass()]
 			item.ProgressBar:SetMax(quest.TargetValue)
 			item.ProgressBar:SetCurrent(data[item:GetQuestClass()])
+			item.ProgressBar.Finished = table.HasValue(TTTQuests.MyQuestsFinished, item:GetQuestClass() || "")
 		end
 	end
 end
