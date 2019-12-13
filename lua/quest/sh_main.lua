@@ -54,12 +54,7 @@ TTTQuests.Log = function( text, text_color, prefix, prefix_color, save )
 			file.Write("TTTQuests_Logs.txt", "")
 		end
 
-		local f = file.Open("TTTQuests_Logs.txt", "w", "DATA")
-		
-		if f then
-			f:Write(string.format("%s %s %s\n", os.date("%d/%m/%YT%H:%M:%S", os.time()), realm, text))
-			f:Close()
-		end
+		file.Append("TTTQuests_Logs.txt", string.format("%s %s %s\n", os.date("%d/%m/%YT%H:%M:%S", os.time()), realm, text))
 	end
 end
 
