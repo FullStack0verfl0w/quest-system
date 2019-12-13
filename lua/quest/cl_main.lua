@@ -25,15 +25,6 @@ surface.GetTextSizeWithFont = function(text, font)
 	return surface.GetTextSize(text)
 end
 
-TTTQuests.GetItemNameByClass = function(className)
-	for _, v in pairs(Pointshop2.GetRegisteredItems()) do
-		if ( v.className == className ) then
-			return v.PrintName
-		end
-	end
-	return ""
-end
-
 // Here we will refre data about quests
 TTTQuests.OnOpenMenu = function()
 	net.Start("GetQuestsData")

@@ -63,6 +63,15 @@ TTTQuests.Log = function( text, text_color, prefix, prefix_color, save )
 	end
 end
 
+TTTQuests.GetItemNameByClass = function(className)
+	for _, v in pairs(Pointshop2.GetRegisteredItems()) do
+		if ( v.className == className ) then
+			return v.PrintName
+		end
+	end
+	return ""
+end
+
 if ( SERVER ) then
 	include("quest/sv_main.lua")
 else
