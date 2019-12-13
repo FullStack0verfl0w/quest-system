@@ -72,19 +72,19 @@ TTTQuests.RewardPlayer = function(ply, questName, rewardType, reward)
 		
 		// Print nice message
 		Pointshop2Controller:getInstance( ):addToPointFeed( ply, string.format("%s complete", questName), reward )
-		TTTQuests.Log(string.format("%s gets %d Standard Points for completing quest %s", ply:Name(), reward, TTTQuests.Quests[class].Name), nil, nil, nil, true)
+		TTTQuests.Log(string.format("%s gets %d Standard Points for completing quest %s", ply:Name(), reward, questName), nil, nil, nil, true)
 	elseif ( rewardType == TTTQuests.RewardType.PremiumPoints ) then
 		ply:PS2_AddPremiumPoints( reward )
 		
 		// Print nice message
 		Pointshop2Controller:getInstance( ):addToPointFeed( ply, string.format("%s complete", questName), reward )
-		TTTQuests.Log(string.format("%s gets %d Premium Points for completing quest %s", ply:Name(), reward, TTTQuests.Quests[class].Name), nil, nil, nil, true)
+		TTTQuests.Log(string.format("%s gets %d Premium Points for completing quest %s", ply:Name(), reward, questName), nil, nil, nil, true)
 	elseif ( rewardType == TTTQuests.RewardType.Item ) then
 		ply:PS2_EasyAddItem( reward )
-		TTTQuests.Log(string.format("%s gets item with id %s for completing quest %s", ply:Name(), reward, TTTQuests.Quests[class].Name), nil, nil, nil, true)
+		TTTQuests.Log(string.format("%s gets item with id %s for completing quest %s", ply:Name(), reward, questName), nil, nil, nil, true)
 	elseif ( rewardType == TTTQuests.RewardType.Experience ) then
 		gLevel.giveExp(ply, reward)
-		TTTQuests.Log(string.format("%s gets %d experience for completing quest %s", ply:Name(), reward, TTTQuests.Quests[class].Name), nil, nil, nil, true)
+		TTTQuests.Log(string.format("%s gets %d experience for completing quest %s", ply:Name(), reward, questName), nil, nil, nil, true)
 	elseif ( rewardType == TTTQuests.RewardType.Random ) then
 		local rand = table.Random(reward)
 
