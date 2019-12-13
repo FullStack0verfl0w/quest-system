@@ -57,7 +57,7 @@ TTTQuests.Log = function( text, text_color, prefix, prefix_color, save )
 		local f = file.Open("TTTQuests_Logs.txt", "w", "DATA")
 		
 		if f then
-			f:Write(os.date("%d/%m/%YT%H:%M:%S", os.time()), realm, text, "\n")
+			f:Write(string.format("%s %s %s\n", os.date("%d/%m/%YT%H:%M:%S", os.time()), realm, text))
 			f:Close()
 		end
 	end
