@@ -123,7 +123,16 @@ TTTQuests.Main = function(self)
 		// Now let's try  to init hooks on the server realm
 		for class, quest in pairs(self.Quests) do
 			for hookName, func in pairs(quest.Hooks) do
-				hook.Add(hookName, class .. hookName, func)
+				// We need to log every error in quests
+				local errorHandler = function(...)
+					local args = {...}
+					local success, err = pcall(func, unpack(args))
+
+					if err then
+						self.Log(err, nil, nil, nil, true)
+					end
+				end
+				hook.Add(hookName, class .. hookName, errorHandler)
 			end
 		end
 
