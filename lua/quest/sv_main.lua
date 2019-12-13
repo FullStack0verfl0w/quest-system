@@ -81,7 +81,7 @@ TTTQuests.RewardPlayer = function(ply, questName, rewardType, reward)
 		TTTQuests.Log(string.format("%s gets %d Premium Points for completing quest %s", ply:Name(), reward, questName), nil, nil, nil, true)
 	elseif ( rewardType == TTTQuests.RewardType.Item ) then
 		ply:PS2_EasyAddItem( reward )
-		TTTQuests.Log(string.format("%s gets item with id %s for completing quest %s", ply:Name(), reward, questName), nil, nil, nil, true)
+		TTTQuests.Log(string.format("%s gets item %s for completing quest %s", ply:Name(), TTTQuests.GetItemNameByClass(reward), questName), nil, nil, nil, true)
 	elseif ( rewardType == TTTQuests.RewardType.Experience ) then
 		gLevel.giveExp(ply, reward)
 		TTTQuests.Log(string.format("%s gets %d experience for completing quest %s", ply:Name(), reward, questName), nil, nil, nil, true)
