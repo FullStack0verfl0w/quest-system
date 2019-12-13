@@ -40,13 +40,27 @@ table.RandomWithChance = function(tab)
 end
 
 
-TTTQuests.Log = function( text, text_color, prefix, prefix_color )
+TTTQuests.Log = function( text, text_color, prefix, prefix_color, save )
 	local realm = SERVER && "(SERVER) " || "(CLIENT) "
 	text_color = !text_color && Color(0, 255, 0) || text_color;
 	prefix = !prefix && "[TTTQuests] " || prefix;
 	prefix_color = !prefix_color && Color(255, 0, 0) || prefix_color;
 
 	MsgC( prefix_color, prefix, realm, text_color, text, "\n" );
+
+	if save then
+		// Create file if it does not exists
+		if !file.Exists("TTTQuests_Logs.txt", "DATA") then
+			file.Write("TTTQuests_Logs.txt", "")
+		end
+
+		local f = file.Open("TTTQuests_Logs.txt", "w", "DATA")
+		
+		if f then
+			f:Write(os.date("%d/%m/%YT%H:%M:%S", os.time()), realm, text, "\n")
+			f:Close()
+		end
+	end
 end
 
 if ( SERVER ) then
